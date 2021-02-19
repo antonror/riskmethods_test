@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: riskmethods_devskiller
+
+test:
+  <<: *default
+  host: postgres
+  port: 5432
+  username: task_user
+  password: task_password
+  database: task_db
+
+production:
+  <<: *default
