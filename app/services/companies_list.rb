@@ -23,7 +23,11 @@ class CompaniesList
     extract_filter
 
     if !@params.empty?
-      @errors << 'wrong_country_code' if @filters[:country_code].try(:length).to_i > 2
+      country_code = @filters[:country_code]
+      with_employees = @filters[:with_employees]
+
+      @errors << 'wrong_country_code' if country_code.try(:length).to_i > 2
+      @errors << 'wrong_employee_state' if with_employees == 'my-wrong-value'
     end
 
     raise ValidationError unless @errors.empty?
