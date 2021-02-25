@@ -4,7 +4,10 @@ class CompaniesController < ApplicationController
   def index
     outcome = CompaniesList.new(params).call
 
-    # your code here
-    render json: {}
+    if outcome[:errors].present?
+      render json: outcome, status: :bad_request
+    else
+      render json: outcome, status: :ok
+    end
   end
 end
